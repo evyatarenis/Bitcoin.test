@@ -1,0 +1,54 @@
+﻿@model Bitcoin_Test.Models.Order
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create";
+}
+<style type="text/css">.control-label { }</style>
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName)
+                <input asp-for="UserName" id="UserName" name="UserName" class="form-control" value="@User.Identity.Name" disabled />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Amount)
+                <input asp-for="Amount" id="Amount" name="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price)
+                <input asp-for="Price" id="Price" name="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OrderType)
+                <select asp-for="OrderType" id="OrderType" name="OrderType" class="form-control">
+                    <option value="0">Sell</option>
+                    <option value="1">Buy</option>
+                </select>
+                <span asp-validation-for="OrderType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" formmethod="post" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
